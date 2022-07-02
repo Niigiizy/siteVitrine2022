@@ -20,8 +20,8 @@
   "a a a a a c c"
   "d d d d d c c"
   ;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 10vw 10vw 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 10vw 10vw;
   /* grid-column-gap: 20px; */
 }
 
@@ -145,7 +145,19 @@
   background-color: var(--back);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1700px) {
+
+  .childCase2 {
+    padding: 10px;
+  }
+
+} 
+
+@media (max-width: 900px) {
+
+  .chartLangage {
+    padding: 0px;
+  }
 
   .grid {
     flex: 1;

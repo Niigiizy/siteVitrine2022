@@ -17,7 +17,7 @@ import {
 import { Bar, Radar } from 'react-chartjs-2';
 import styles from '../../styles/Competence.module.css'
 import { Divider, Rating } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 ChartJS.register(
     RadialLinearScale,
@@ -32,8 +32,43 @@ ChartJS.register(
     Legend
 );
 
+const x: "x" | "y" | undefined = "x"
+const y: "x" | "y" | undefined = "y"
+
 export const options_language = {
     responsive: true,
+    indexAxis: x,
+    elements: {
+        bar: {
+            borderColor: "#283593",
+            borderWidth: 2,
+            borderRadius: 10,
+            backgroundColor: "#283593"
+        }
+    },
+    plugins: {
+      legend: {
+        display: false
+      },
+      tooltip: {
+        enabled: false
+      },
+      title: {
+        display: false
+      },
+    },
+    scales: {
+        x: {
+            grid: {
+              offset: false
+            }
+        }
+    }
+};
+
+export const options_language_horizontal = {
+    responsive: true,
+    indexAxis: y,
     elements: {
         bar: {
             borderColor: "#283593",
@@ -107,6 +142,18 @@ export const data = {
     ],
 };
 
+export const data_horizontal = {
+    labels,
+    datasets: [
+      {
+        label: 'competence language',
+        data: [90, 100, 80, 100, 70, 70, 50, 50],
+        backgroundColor: ['rgba(40, 53, 144, 0.5)'],
+        axis: 'y'
+      }
+    ],
+};
+
 const data_radar = {
     labels: [
       'Humour',
@@ -142,6 +189,11 @@ const Conpetence: NextPage = () => {
     const [experience, set_experience] = useState<number>(0)
     const [baccalaureat, set_baccalaureat] = useState<number>(1990)
     const [licenceMath, set_licenceMath] = useState<number>(1990)
+    const [chart_horizontal, set_chart_horizontal] = useState<boolean>(true)
+    const [ess, set_ess] = useState<number>(0)
+
+    const ref_set_chart_horizontal = useRef(set_chart_horizontal)
+    const ref_chart_horizontal = useRef(chart_horizontal)
 
     useEffect(() => {
         for (let i = 0; i < 2017; i++) {
@@ -159,6 +211,26 @@ const Conpetence: NextPage = () => {
             }
         }
     }, [age,experience,baccalaureat,licenceMath])
+    
+
+    useEffect(() => {
+        const listener_resize = (event: any): void => {
+            console.log(ref_chart_horizontal.current);
+            set_ess(event.target.innerWidth)
+            if (chart_horizontal && event.target.innerWidth < 715) {
+                console.log("change chart horizontal 1")
+                set_chart_horizontal(true)
+                ref_chart_horizontal.current = true
+            }
+            if (chart_horizontal! && event.target.innerWidth > 715) {
+                console.log("change chart horizontal 2")
+                set_chart_horizontal(false)
+                ref_chart_horizontal.current = false
+            }
+        }
+        window.addEventListener('resize', listener_resize)
+        return () => window.removeEventListener('resize', listener_resize)
+    }, [])
 
     return (
         <div className={styles.container}>
@@ -175,7 +247,12 @@ const Conpetence: NextPage = () => {
                     <div className={styles.case1}>
                         <div className={styles.childCase1}>
                             <div className={styles.chartLangage}>
-                                <Bar options={options_language} data={data} height={100} />
+                                {
+                                    chart_horizontal! ?
+                                    <Bar options={options_language} data={data} height={100} />
+                                    :
+                                    <Bar options={options_language_horizontal} data={data} height={100} />
+                                }
                             </div>
                         </div>
                     </div>
@@ -188,7 +265,7 @@ const Conpetence: NextPage = () => {
                         <div className={styles.childCase3}>
                             <div className={styles.compLangage}>
                                 <p>
-                                    Javascript
+                                    Javascript {ess} {chart_horizontal.toString()}
                                 </p>
                                 <Rating defaultValue={4.5} precision={0.5} readOnly />
                             </div>
