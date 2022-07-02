@@ -6,20 +6,233 @@
   height: calc(100% - 50px);
   padding-left: 10px;
   padding-right: 10px;
-  background-color: #283593;
+  background-color: var(--back);
 }
+
+.grid {
+  flex: 1;
+  display: grid;
+  /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr; */
+  grid-template-areas: 
+  "a a a a a b b"
+  "a a a a a b b"
+  "a a a a a c c"
+  "d d d d d c c"
+  ;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  /* grid-column-gap: 20px; */
+}
+
+.case1 {
+  grid-area: a;
+  padding: 5px;
+  display: flex;
+}
+
+.case2 {
+  grid-area: b;
+  padding: 5px;
+  width: 100%;
+}
+
+.case3 {
+  grid-area: c;
+  padding: 5px;
+  display: flex;
+}
+
+.case4 {
+  grid-area: d;
+  padding: 5px;
+  display: flex;
+}
+
+.childCase1 {
+  flex: 1;
+  border-radius: 20px;
+  /* border: 1px solid var(--grey-2) ; */
+  box-shadow: 2px 2px 5px var(--grey-2);
+  background-color: var(--back);
+  display: flex;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.childCase2 {
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* display: flex; */
+  padding: 50px;
+  /* justify-content: center;
+  align-items: center; */
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px var(--grey-2);
+  background-color: var(--back);
+  /* overflow: auto; */
+}
+
+.childCase3 {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  font-weight: bold;
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px var(--grey-2);
+  background-color: var(--back);
+}
+
+.childCase4 {
+  flex: 1;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px var(--grey-2);
+  background-color: var(--back);
+  display: flex;
+  flex-direction: row;
+}
+
+.chartLangage {
+  flex: 2;
+  padding: 50px 20px 50px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.chiffreClefs {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  line-height: 10px;
+}
+
+.chiffreClefs p {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.chiffreClefs h1 {
+  font-size: 1.5rem;
+  color: var(--grey-4);
+}
+
+.compLangage {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
 
 .footer {
   width: 100%;
   height: 10px;
   position: absolute;
   bottom: 0;
-  background-color: #283593;
+  background-color: var(--back);
 }
 
 @media (max-width: 600px) {
+
   .grid {
-    width: 100%;
+    flex: 1;
+    display: flex;
     flex-direction: column;
+    /* flex-wrap: wrap; */
+    overflow-y: scroll;
+    /* grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+    "a"
+    "b"
+    "c"
+    "d"
+    ; */
+    
+    /* grid-column-gap: 20px; */
   }
+
+  .grid::-webkit-scrollbar-track {
+    background-color: red;
+  }
+  .grid::-webkit-scrollbar {
+    width: 8px; 
+    padding-bottom: 20px;
+  }
+  
+  .grid::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+  
+  .grid::-webkit-scrollbar-thumb {
+    background-color: var(--grey-2); 
+    border-radius: 20px; 
+    /* border: 3px solid orange;  */
+  }
+  
+  /* .case1 {
+    grid-area: a;
+    padding: 5px;
+    display: flex;
+  }
+  
+  .case2 {
+    grid-area: b;
+    padding: 5px;
+    display: flex;
+  }
+  
+  .case3 {
+    grid-area: c;
+    padding: 5px;
+    display: flex;
+  }
+  
+  .case4 {
+    grid-area: d;
+    padding: 5px;
+    display: flex;
+  }
+  
+  .childCase1 {
+    flex: 1;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px var(--grey-2);
+    background-color: var(--back);
+  }
+  
+  .childCase2 {
+    flex: 1;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px var(--grey-2);
+    background-color: var(--back);
+  }
+  
+  .childCase3 {
+    flex: 1;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px var(--grey-2);
+    background-color: var(--back);
+  }
+  
+  .childCase4 {
+    flex: 1;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px var(--grey-2);
+    background-color: var(--back);
+  } */
+
 }

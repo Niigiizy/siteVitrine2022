@@ -6,7 +6,7 @@
   height: calc(100% - 50px);
   padding-left: 10px;
   padding-right: 10px;
-  background-color: #283593;
+  background-color: var(--back);
 }
 
 .footer {
@@ -14,7 +14,7 @@
   height: 10px;
   position: absolute;
   bottom: 0;
-  background-color: #283593;
+  background-color: var(--back);
 }
 
 @media (max-width: 600px) {
